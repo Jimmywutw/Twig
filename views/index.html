@@ -1,0 +1,23 @@
+Hello, {{ name }}! You are {{ age }} years old.<br /><br />
+<p>
+{ if age > 15 }
+
+	 You are over the age of 15.<br /><br />
+
+{ endif }
+</p>
+
+{ for user in users }
+
+	<p>{{ user.name}} is {{ user.age}} years old.</p>
+	
+
+{ endfor }
+
+{ for user in family }
+	<div class="user" style="background-color: #ccc">{{ user.name}} is {{ user.age }} years old.</div>
+
+{ endfor}
+
+
+<h2 style="color:blue;">{{ 'string' | md5 }}</h2>

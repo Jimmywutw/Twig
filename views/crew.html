@@ -1,0 +1,50 @@
+{% block content %}
+
+<div class="container">
+		<div class="cow">
+			<div class="col-xs-12">
+				<table class="table table-bordered">
+					<caption>
+						<strong>{{ name }}</strong> - {{ type }} <em>({{owner}})</em> 
+						| {{ attribute(_context, 'reg-no')}} <!-- 因為reg"-"no,需使用attribute去轉換 該attribute函數可用於訪問變量的“動態”屬性：-->
+					</caption>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Role</th>
+								<th>Status</th>
+								<th>Notes</th>
+								<th>Badges</th>
+							</tr>					
+						</thead>
+						<tbody>
+							
+							{% for user in crew %}
+							
+							<tr class="{% if user.status == 'Alive' %} success {% endif %},
+									   {% if user.status == 'Dead' %} danger {% endif %},
+									   {{ cycle(['odd', 'even'], loop.index0) }}
+									   ">
+								<td><strong>{{ loop.index }}</strong></td>
+								<td><strong>{{ user.name |upper }}{{ attribute(user,'reg-no') }}</strong></td>
+								<td>{{ user['role'] }} </td>
+								<td>{{ user.status }} </td>
+								<td><em>{{ user.notes }}</em></td>
+								<td>
+									{% for badge in user.badges %}
+									<span class="btn-sm btn-success {{ badge }} "> {{ loop.index ~ '-' ~ badge }} </span>
+									{% endfor %}
+									</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+				</table>			
+			</div>
+		</div>
+	</div>
+
+    
+{% endblock content %}
+
+				
